@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import ToDo
 
 
@@ -12,3 +12,13 @@ def test(request):
 
 def check(request):
     return HttpResponse("текшируу")
+
+
+def add_todo(request):
+    f = request.POST
+    text = f["todo_text"]
+    todo = ToDo(
+        text=text
+    )
+    todo.save()
+    return redirect(homepage)
